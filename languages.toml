@@ -1,0 +1,126 @@
+[[language]]
+name = "python"
+roots = ["pyproject.toml"]
+formatter = { command = "black", args = ["--quiet", "-"] }
+language-server = { command = "pyright-langserver", args = ["--stdio"] }
+config = {} 
+auto-format = true
+indent = { tab-width = 4, unit = "    " }
+rulers = [80]
+
+[[language]]
+name = "rust"
+auto-format = true
+rulers = [80]
+
+[[language]]
+name = "typescript"
+scope = "source.ts"
+injection-regex = "(ts|typescript)"
+file-types = ["ts","mts","cts"]
+auto-format = true
+language-server = { command = "typescript-language-server", args = ["--stdio"], language-id = "typescript" }
+# pass format options according to https://github.com/typescript-language-server/typescript-language-server#workspacedidchangeconfiguration omitting the "[language].format." prefix.
+config = { format = { "semicolons" = "insert", "insertSpaceBeforeFunctionParenthesis" = true } }
+indent = { tab-width = 2, unit = "  " }
+rulers = [80]
+
+[[language]]
+name = "tsx"
+scope = "source.tsx"
+injection-regex = "(tsx)"
+file-types = ["tsx"]
+auto-format = true
+language-server = { command = "typescript-language-server", args = ["--stdio"], language-id = "typescriptreact" }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "css"
+scope = "source.css"
+injection-regex = "css"
+file-types = ["css", "scss"]
+roots = []
+language-server = { command = "vscode-css-language-server", args = ["--stdio"] }
+auto-format = true
+config = { "provideFormatter" = true }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "scss"
+scope = "source.scss"
+auto-format = true
+injection-regex = "scss"
+file-types = ["scss"]
+roots = []
+language-server = { command = "vscode-css-language-server", args = ["--stdio"] }
+config = { "provideFormatter" = true }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "html"
+scope = "text.html.basic"
+injection-regex = "html"
+file-types = ["html"]
+roots = []
+language-server = { command = "vscode-html-language-server", args = ["--stdio"] }
+auto-format = true
+config = { "provideFormatter" = true }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "javascript"
+scope = "source.js"
+injection-regex = "(js|javascript)"
+file-types = ["js", "mjs", "cjs"]
+shebangs = ["node"]
+roots = []
+comment-token = "//"
+auto-format = true
+language-server = { command = "typescript-language-server", args = ["--stdio"], language-id = "javascript" }
+indent = { tab-width = 2, unit = "  " }
+rulers = [80]
+
+[[language]]
+name = "jsx"
+scope = "source.jsx"
+injection-regex = "jsx"
+file-types = ["jsx"]
+roots = []
+comment-token = "//"
+language-server = { command = "typescript-language-server", args = ["--stdio"], language-id = "javascriptreact" }
+auto-format = true
+indent = { tab-width = 2, unit = "  " }
+grammar = "javascript"
+rulers = [80]
+
+[[language]]
+name = "markdown"
+scope = "source.md"
+injection-regex = "md|markdown"
+file-types = ["md", "markdown", "PULLREQ_EDITMSG"]
+auto-format = true
+roots = [".marksman.toml"]
+language-server = { command = "marksman", args=["server"] }
+indent = { tab-width = 2, unit = "  " }
+
+[[language]]
+name = "markdown.inline"
+scope = "source.markdown.inline"
+injection-regex = "markdown\\.inline"
+file-types = []
+auto-format = true
+roots = []
+grammar = "markdown_inline"
+
+[language.debugger]
+name = "node-debug2"
+command = "node"
+transport = "stdio"
+quirks = { absolute-paths = true }
+args = ["/home/alpha2phi/workspace/temp/vscode-node-debug2/out/src/nodeDebug.js"]
+
+[[language.debugger.templates]]
+name = "source"
+request = "launch"
+completion = [ { name = "main", completion = "filename", default = "index.js" } ]
+args = { program = "{0}" }
